@@ -4,7 +4,7 @@ import json
 
 private_key = [0, 1]
 
-path = os.path.join(os.path.dirname(__file__), 'utils', 'key.json')
+path = os.path.join(os.path.dirname(__file__), 'key.json')
 
 with open(path) as read_file:
     data = json.load(read_file)
