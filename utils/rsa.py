@@ -1,7 +1,7 @@
 import json
 
 private_key = [0, 1]
-with open("utils/key.json", "r") as read_file:
+with open(".utils/key.json" if "cogs" in __name__ else "utils/key.json", "r") as read_file:
     data = json.load(read_file)
     private_key[0] = data["private_key"][0]
     private_key[1] = data["private_key"][1]
