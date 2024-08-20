@@ -60,7 +60,7 @@ class LogsCheckerCog(commands.Cog):
                           "Просим отправить в этот чат сгенерированный файл.")
         await ctx.channel.send("Файл: ", file=file)
 
-    @commands.message_command(name="get_logs", descriprion="Прочесть логи.")
+    @commands.message_command(name="Получить и обработать логи.", descriprion="Прочесть логи.")
     async def read_logs(self, ctx: discord.ApplicationContext, message: discord.Message):
 
         if not message.attachments:
