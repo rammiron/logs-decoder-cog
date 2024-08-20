@@ -1,4 +1,5 @@
 import json
+
 private_key = [0, 1]
 with open("utils/key.json", "r") as read_file:
     data = json.load(read_file)
@@ -18,7 +19,6 @@ def deserialize_enc_logs(input):
     return int_array
 
 
-
 def decrypt(input):
     target_enc_data = deserialize_enc_logs(input)
 
@@ -33,4 +33,3 @@ def decrypt(input):
         temp_arr.append(temp)
 
     return temp_arr.decode()
-

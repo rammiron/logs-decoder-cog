@@ -3,9 +3,11 @@ import base64
 from discord.ext import commands
 from utils.rsa import decrypt
 
+
 class LogsCheckerCog(commands.Cog):
     local_path = __name__
     exe_path = f"{local_path}/../logs-checker/logs-checker.exe"
+
     def __init__(self, bot: discord.Bot):
         self.bot = bot
 
@@ -81,8 +83,8 @@ class LogsCheckerCog(commands.Cog):
 
         )
         for log in parsed_logs:
-            embed.add_field(name=f"{log}:", value=f"Описание: {parsed_logs[log]
-            ['Description']}\nДата: {parsed_logs[log]['Date']}"
+            embed.add_field(name=f"{log}:", value=f"Описание: {parsed_logs[log]['Description']}\nДата: "
+                                                  f"{parsed_logs[log]['Date']}"
                                                   f" \nКод: {parsed_logs[log]["Event ID"]}\n", inline=False)
 
         try:
