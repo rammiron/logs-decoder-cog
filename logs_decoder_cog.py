@@ -1,7 +1,11 @@
 import discord
 import base64
 from discord.ext import commands
-from utils.rsa import decrypt
+
+if "cogs" in __name__:
+    from .utils.rsa import decrypt
+else:
+    from utils.rsa import decrypt
 
 
 class LogsCheckerCog(commands.Cog):
@@ -85,7 +89,7 @@ class LogsCheckerCog(commands.Cog):
         for log in parsed_logs:
             embed.add_field(name=f"{log}:", value=f"Описание: {parsed_logs[log]['Description']}\nДата: "
                                                   f"{parsed_logs[log]['Date']}"
-                                                  f" \nКод: {parsed_logs[log]["Event ID"]}\n", inline=False)
+                                                  f" \nКод: {parsed_logs[log]['Event ID']}\n", inline=False)
 
         try:
             await ctx.author.send(embed=embed)
