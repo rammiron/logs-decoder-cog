@@ -60,18 +60,14 @@ class LogsCheckerCog(commands.Cog):
                           "Просим отправить в этот чат сгенерированный файл.")
         await ctx.channel.send("Файл: ", file=file)
 
-    @commands.command(name="get_logs", descriprion="Прочесть логи.")
-    async def read_logs(self, ctx: discord.ApplicationContext):
+    @commands.message_command(name="get_logs", descriprion="Прочесть логи.")
+    async def read_logs(self, ctx: discord.ApplicationContext, message: discord.Message):
 
-        if ctx.message.reference:
-            original = await ctx.fetch_message(ctx.message.reference.message_id)
-            if not original.attachments:
-                return
-            attachment = original.attachments[0]
-        else:
-            if not ctx.message.attachments:
-                return
-            attachment = ctx.message.attachments[0]
+        if not message.attachments:
+            await ctx.respond("Файл logs.ds не обнаружен.", ephemeral=True)
+            return
+        attachment = message.attachments[0]
+
         if not attachment.filename.endswith(".ds"):
             return
         file = await attachment.read()
@@ -93,6 +89,7 @@ class LogsCheckerCog(commands.Cog):
                                                   f" \nКод: {parsed_logs[log]['Event ID']}\n", inline=False)
 
         try:
+            await ctx.respond("Успешно. Логи отправлены в личные сообщения.", ephemeral=True)
             await ctx.author.send(embed=embed)
         except:
             await ctx.channel.send(f"{ctx.author.mention}, похоже у вас закрыт лс. Откройте лс и повторите попытку.")
