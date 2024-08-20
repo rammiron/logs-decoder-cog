@@ -1,3 +1,5 @@
+import os
+
 import discord
 import base64
 from discord.ext import commands
@@ -9,8 +11,7 @@ else:
 
 
 class LogsCheckerCog(commands.Cog):
-    local_path = __name__
-    exe_path = f"{local_path}/../logs-checker/logs-checker.exe"
+    exe_path = os.path.join(os.path.dirname(__file__), "logs-checker", 'logs-checker.exe')
 
     def __init__(self, bot: discord.Bot):
         self.bot = bot
